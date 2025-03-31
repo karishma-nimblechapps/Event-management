@@ -235,6 +235,7 @@ const LandingPage = () => {
           
           <div className="container position-relative" style={{ zIndex: 2 }}>
             <div className="row align-items-center">
+              {/* Left Box */}
               <div className="col-lg-6 text-white">
                 <div style={{ 
                   background: 'rgba(255, 255, 255, 0.1)',
@@ -250,7 +251,7 @@ const LandingPage = () => {
                     letterSpacing: '-0.5px',
                     textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
                   }}>
-                    Experience Events Through <span style={{ color: theme.colors.primary }}>Vibe</span>Catcher
+                    Experience Events Through <span style={{ color: theme.colors.primary }}>Event Hive</span>
                   </h1>
                   
                   <p className="lead mb-5" style={{
@@ -258,15 +259,14 @@ const LandingPage = () => {
                     fontSize: '1.25rem',
                     lineHeight: '1.6'
                   }}>
-                    VibeCatcher transforms how you discover, experience, and remember events with cutting-edge artificial intelligence that personalizes every moment.
+                    Event Hive transforms how you discover, experience, and remember events. Get yourself registered and start exploring a world of possibilities!
                   </p>
-                  
-                  {/* Updated buttons for clearer navigation */}
-                  <div className="d-flex flex-column flex-sm-row gap-3">
+
+                  <div className="row align-items-center d-flex flex-column flex-sm-row gap-3">
                     <Button primary onClick={() => navigate('/registration')}>
                       Register
                     </Button>
-                    <button 
+                    {/* <button 
                       className="btn btn-lg" 
                       onClick={() => navigate('/login')}
                       style={{
@@ -282,26 +282,65 @@ const LandingPage = () => {
                       }}
                     >
                       Login
+                    </button> */}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Box */}
+              <div className="col-lg-6 text-white">
+                <div style={{ 
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '2.5rem',
+                  borderRadius: theme.borderRadius.lg,
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)'
+                }}>
+                  <h1 className="display-4 fw-bold mb-4" style={{
+                    color: 'white',
+                    fontWeight: '800',
+                    letterSpacing: '-0.5px',
+                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+                  }}>
+                    Login Yourself <span style={{ color: theme.colors.primary }}>Event Hive</span>
+                  </h1>
+                  
+                  <p className="lead mb-5" style={{
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    fontSize: '1.25rem',
+                    lineHeight: '1.6'
+                  }}>
+                    Stay updated on upcoming events, join communities, and engage in unique experiences ewubfweubvwbvueb vhbbfeuqbcuqegfqg3wuigbv fb !
+                  </p>
+
+                  <div className="row align-items-center d-flex flex-column flex-sm-row gap-3">
+                    {/* <Button primary onClick={() => navigate('/login')}>
+                      Login
+                    </Button> */}
+                    <button 
+                      className="btn btn-lg" 
+                      onClick={() => navigate('/login')}
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.2)',
+                        color: 'white',
+                        borderRadius: theme.borderRadius.md,
+                        padding: '0.75rem 2rem',
+                        fontSize: '1.1rem',
+                        fontWeight: '600',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        backdropFilter: 'blur(5px)',
+                        transition: theme.transitions.default
+                      }}
+                    >
+                      Log In
                     </button>
                   </div>
                 </div>
               </div>
-              
-              <div className="col-lg-6 d-none d-lg-block">
-                <img 
-                  src="/api/placeholder/600/600" 
-                  alt="Event experience" 
-                  className="img-fluid rounded-circle p-3" 
-                  style={{ 
-                    border: '5px solid rgba(255, 255, 255, 0.2)',
-                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    backdropFilter: 'blur(5px)'
-                  }}
-                />
-              </div>
             </div>
           </div>
+
           
           {/* Animated scroll indicator */}
           <div className="position-absolute bottom-0 start-50 translate-middle-x mb-4" style={{ zIndex: 2 }}>

@@ -18,7 +18,7 @@ const theme = {
 };
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [identifier, setIdentifier] = useState(""); // Username or Email
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -33,7 +33,7 @@ function Login() {
   }, []);
 
   const validateFields = () => {
-    if (!username.trim()) {
+    if (!identifier.trim()) {
       setMessage({ text: "Username is required", type: "danger" });
       return false;
     }
@@ -53,7 +53,7 @@ function Login() {
   
     try {
       const { data } = await axios.post("http://localhost:3001/auth/login", { 
-        username: username.trim(), 
+        identifier: identifier.trim(), 
         password 
       });
   
@@ -69,7 +69,7 @@ function Login() {
   
         // Set the AuthContext
         setAuthState({
-          username: data.user.username || username,
+          username: data.user.username || identifier,
           id: data.user.id,
           isAdmin: data.user.isAdmin,
           status: true,
@@ -155,10 +155,10 @@ function Login() {
         )}
 
         <form onSubmit={login}>
-          {/* Username Field with Icon */}
-          <div className="mb-4">
+           {/* Username or email Field with Icon */}
+           <div className="mb-4">
             <label className="form-label small fw-bold" style={{ color: theme.dark }}>
-              Username
+              Username or Email
             </label>
             <div className="input-group">
               <span 
@@ -174,9 +174,9 @@ function Login() {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter your username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your username or email"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
                 onKeyPress={handleKeyPress}
                 style={{ 
                   backgroundColor: theme.inputBg,

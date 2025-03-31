@@ -1,5 +1,14 @@
+const { Sequelize, UUIDV4 } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
     const Events = sequelize.define("Events", {
+
+        id: {
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.UUIDV4,
+            allowNull: false,
+            primaryKey: true
+        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -42,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
         });
 
         Events.hasOne(models.EventAnalytics, {
-            foreignKey: 'event_id',
+            foreignKey: 'eventId',
             onDelete: 'CASCADE'
           });
     };

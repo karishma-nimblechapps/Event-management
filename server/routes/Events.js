@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Events, Reviews } = require("../models");
+const { Events, Reviews, UserEvents } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const multer = require("multer");
 const path = require("path");
@@ -77,6 +77,11 @@ router.post("/", validateToken, upload.single("image"), async (req, res) => {
 
         const newEvent = await Events.create(newEventData);
 
+        await UserEvents.create({
+            userId:req.user.id,
+            eventId: newEvent.id,
+        })
+
         res.status(201).json(newEvent);
     } catch (error) {
         console.error("Error creating event:", error);
@@ -89,9 +94,6 @@ router.get("/:eventId", async (req, res) => {
     try {
         const eventId = req.params.eventId;
 
-        if (!eventId || isNaN(eventId)) {
-            return res.status(400).json({ error: "Invalid event ID" });
-        }
 
         const event = await Events.findByPk(eventId, {
             attributes: ["id", "title", "location", "description", "date", "time", "category", "image", "username"],

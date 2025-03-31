@@ -130,7 +130,7 @@ function App() {
       {/* Brand/Logo */}
       <Link className="navbar-brand d-flex align-items-center" to="/">
         <i className="bi bi-calendar-event fs-4 me-2"></i>
-        <span className="fw-bold">VibeCatcher</span>
+        <span className="fw-bold">Event Hive</span>
       </Link>
 
       {/* Navbar Toggler */}

@@ -1,13 +1,16 @@
 // models/EventAnalytics.js 
+const { Sequelize, UUIDV4 } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
     const EventAnalytics = sequelize.define("EventAnalytics", {
       id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
+        primaryKey: true
       },
-      event_id: {
-        type: DataTypes.INTEGER,
+      eventId: {
+        type: Sequelize.UUID,
         allowNull: false
       },
       attendance_data: {
@@ -93,7 +96,7 @@ module.exports = (sequelize, DataTypes) => {
   
     EventAnalytics.associate = (models) => {
       EventAnalytics.belongsTo(models.Events, {
-        foreignKey: "event_id",
+        foreignKey: "eventId",
         onDelete: "CASCADE"
       });
     };

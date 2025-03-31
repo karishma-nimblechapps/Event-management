@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const { Op } = require("sequelize");
 require("dotenv").config();
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
@@ -37,10 +38,10 @@ router.post("/", async (req, res) => {
     try {
         console.log("Received Registration Request:", req.body);
 
-        const { username, password, isAdmin } = req.body;
+        const { username,email, password, isAdmin } = req.body;
 
         // Check if user already exists
-        const existingUser = await Users.findOne({ where: { username } });
+        const existingUser = await Users.findOne({ where: { username,email } });
         if (existingUser) {
             return sendError(res, 400, "Username already taken");
         }
@@ -55,7 +56,8 @@ router.post("/", async (req, res) => {
 
         // Create new user in the database
         const newUser = await Users.create({ 
-            username, 
+            username,
+            email, 
             password: hash, 
             isAdmin: isAdmin || false 
         });
@@ -72,9 +74,14 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         console.log("Login Request:", req.body);
-        const { username, password } = req.body;
+        const { identifier, password } = req.body;
 
-        const user = await Users.findOne({ where: { username } });
+        const user = await Users.findOne({
+          where: {
+            [Op.or]: [{ username: identifier }, { email: identifier }]
+          }
+        });
+        // Check if user exists
 
         if (!user) {
             return sendError(res, 401, "User doesn't exist");
@@ -88,14 +95,14 @@ router.post("/login", async (req, res) => {
 
         // Generate JWT with user role
         const accessToken = sign(
-            { username: user.username, id: user.id, isAdmin: user.isAdmin }, 
+            { username: user.username, id: user.id, isAdmin: user.isAdmin,email:user.email}, 
             SECRET_KEY, 
             { expiresIn: "1h" }
         );
 
         return res.json({ 
             token: accessToken, 
-            user: { id: user.id, username: user.username, isAdmin: user.isAdmin } 
+            user: { id: user.id,email:user.email, username: user.username, isAdmin: user.isAdmin } 
         });
     } catch (error) {
         console.error("Login error:", error);

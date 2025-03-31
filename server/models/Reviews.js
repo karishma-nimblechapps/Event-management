@@ -1,10 +1,13 @@
+const { Sequelize, UUIDV4 } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
     const Reviews = sequelize.define("Reviews", {
         id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-        },
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.UUIDV4,
+            allowNull: false,
+            primaryKey: true
+              },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -32,11 +35,11 @@ module.exports = (sequelize, DataTypes) => {
 
     Reviews.associate = (models) => {
         Reviews.belongsTo(models.Events, {
-            foreignKey: "EventId",  // ✅ Match SQL script
+            foreignKey: "eventId",  // ✅ Match SQL script
             onDelete: "CASCADE",
         });
         Reviews.belongsTo(models.Users, {
-            foreignKey: "UserId",  // ✅ Match SQL script
+            foreignKey: "userId",  // ✅ Match SQL script
             onDelete: "CASCADE",
         });
     };

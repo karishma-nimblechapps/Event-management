@@ -132,12 +132,12 @@ function CreateEvent() {
   // List of common event categories
   const categoryOptions = [
     "Conference",
-    "Workshop",
+    "Art",
     "Seminar",
     "Social",
     "Concert",
     "Exhibition",
-    "Fitness",
+    "Comedy",
     "Community",
     "Education",
     "Entertainment",
@@ -190,7 +190,7 @@ function CreateEvent() {
     position: "relative",
     transform: "translateY(0)",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    animation: "float 6s ease-in-out infinite",
+    // animation: "float 6s ease-in-out infinite",
   }
 
   const cardHeaderStyle = {
@@ -468,7 +468,7 @@ function CreateEvent() {
   return (
     <div style={pageContainerStyle}>
       <div style={containerStyle}>
-        <div style={cardStyle} className="floating-card">
+        <div style={cardStyle}>
           <div style={cardHeaderStyle}>
             <h2 style={headingStyle}>Create Event</h2>
             <p style={subtitleStyle}>Share your exciting event with the community</p>
