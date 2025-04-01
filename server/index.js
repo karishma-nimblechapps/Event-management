@@ -101,7 +101,7 @@ app.use("/AIInsightsRoutes", insightRouter);
 app.use('/api/recommendations', recommendationsRouter);
 
 // Sync database and start the server
-db.sequelize.sync({alter:true}).then(() => {
+db.sequelize.sync().then(() => {
     // Add EventAnalytics model to database if not already exist
     if (!db.EventAnalytics) {
         console.warn("EventAnalytics model not found. Make sure to add it to your models.");

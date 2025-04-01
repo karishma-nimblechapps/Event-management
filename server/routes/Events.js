@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Events, Reviews, UserEvents, EventAnalytics } = require("../models");
+const { Events, Reviews, Users, EventAnalytics } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const multer = require("multer");
 const path = require("path");
@@ -67,7 +67,8 @@ router.post("/", validateToken, upload.single("image"), async (req, res) => {
             date,
             time,
             category,
-            username: req.user.username
+            username: req.user.username,
+            userId: req.user.id
         };
 
         // Add image path if an image was uploaded
@@ -77,10 +78,10 @@ router.post("/", validateToken, upload.single("image"), async (req, res) => {
 
         const newEvent = await Events.create(newEventData);
 
-        await UserEvents.create({
-            userId:req.user.id,
-            eventId: newEvent.id,
-        })
+        // await UserEvents.create({
+        //     userId:req.user.id,
+        //     eventId: newEvent.id,
+        // })
 
         await EventAnalytics.create({
             eventId: newEvent.id})
