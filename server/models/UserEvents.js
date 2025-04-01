@@ -1,4 +1,4 @@
-const { Sequelize, UUIDV4 } = require("sequelize");
+const { sequelize,UUIDV4 } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
     const UserEvents = sequelize.define("UserEvents", {
@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
                 model: "Users",
                 key: "id",
             },
+            onDelete: "CASCADE",
         },
         eventId: {
             type: DataTypes.UUID,
@@ -22,8 +23,24 @@ module.exports = (sequelize, DataTypes) => {
                 model: "Events",
                 key: "id",
             },
+            onDelete: "CASCADE"
         },
-    }, { timestamps: true });
+    },{timestamps: true});
 
+    // Associations
+    UserEvents.associate = (models) => {
+        UserEvents.belongsTo(models.Users, {
+            foreignKey: "userId",
+            as: "User",  // Use a unique alias
+            onDelete: "CASCADE",
+        });
+    
+        UserEvents.belongsTo(models.Events, {
+            foreignKey: "eventId",
+            as: "Event",  // Use a unique alias
+            onDelete: "CASCADE",
+        });
+    };
+    
     return UserEvents;
 };

@@ -404,13 +404,13 @@ const LandingPage = () => {
               <div className="col-lg-6 d-flex justify-content-lg-end align-items-end">
                 <button 
                   className="btn btn-lg"
-                  onClick={() => navigate('/events')}
+                  onClick={() => navigate('/home')}
                   style={{
                     background: theme.colors.primary,
                     color: 'white',
                     borderRadius: '30px',
                     padding: '0.75rem 2rem',
-                    fontWeight: '600',
+                    fontWeight: '400',
                     transition: theme.transitions.default,
                     boxShadow: theme.shadows.md
                   }}
@@ -433,13 +433,13 @@ const LandingPage = () => {
                     className="col-lg-4 col-md-6 mb-4" 
                     key={event.id}
                     style={{ 
-                      transform: `translateY(${index * 20}px)`, 
+                      // transform: `translateY(${index * 20}px)`, 
                       zIndex: 3 - index 
                     }}
                   >
                     <div
                       className="event-card position-relative"
-                      onClick={() => navigate(`/event/${event.id}`)}
+                      // onClick={() => navigate(`/event/${event.id}`)}
                       style={{ 
                         cursor: "pointer",
                         borderRadius: '16px',
@@ -529,7 +529,7 @@ const LandingPage = () => {
                             <span>{event.location}</span>
                           </div>
                           
-                          <button 
+                          {/* <button 
                             className="btn btn-sm mt-2"
                             style={{
                               background: 'white',
@@ -542,7 +542,7 @@ const LandingPage = () => {
                             }}
                           >
                             View Details <i className="bi bi-chevron-right ms-1"></i>
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                       
@@ -717,7 +717,7 @@ const LandingPage = () => {
             <div className="d-flex flex-wrap justify-content-center gap-3">
               <button 
                 className="btn btn-lg" 
-                onClick={() => navigate('/register')}
+                onClick={() => navigate('/registration')}
                 style={{
                   background: 'white', 
                   color: theme.colors.primary,

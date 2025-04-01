@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Events, Reviews, UserEvents } = require("../models");
+const { Events, Reviews, UserEvents, EventAnalytics } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const multer = require("multer");
 const path = require("path");
@@ -81,6 +81,9 @@ router.post("/", validateToken, upload.single("image"), async (req, res) => {
             userId:req.user.id,
             eventId: newEvent.id,
         })
+
+        await EventAnalytics.create({
+            eventId: newEvent.id})
 
         res.status(201).json(newEvent);
     } catch (error) {

@@ -43,18 +43,32 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    // Association with Reviews (optional, if you have Reviews model)
     Events.associate = (models) => {
         Events.hasMany(models.Reviews, {
-            foreignKey: "eventId",  // Match Reviews model's eventId field
+            foreignKey: "eventId",
+            onDelete: "CASCADE",
+        });
+    
+        Events.hasOne(models.EventAnalytics, {
+            foreignKey: "eventId",
             onDelete: "CASCADE",
         });
 
-        Events.hasOne(models.EventAnalytics, {
-            foreignKey: 'eventId',
-            onDelete: 'CASCADE'
-          });
+        Events.belongsToMany(models.Users, {
+            through: models.UserEvents,
+            foreignKey: "eventId",
+            onDelete: "CASCADE",
+        });
+
+        Events.belongsTo(models.Users, {
+            foreignKey: "userId",
+            as: "Organizer",  // Optional alias
+            onDelete: "CASCADE",
+        });
+        
     };
+    
+    
 
 
     return Events;

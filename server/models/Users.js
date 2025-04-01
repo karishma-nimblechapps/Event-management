@@ -42,19 +42,27 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Users.associate = (models) => {
-        // Association with Events (if needed)
-        Users.belongsTo(models.Events, {
-            foreignKey: "eventId",
-            onDelete: "CASCADE",
-            allowNull: true,
+        Users.hasMany(models.Events, {
+            foreignKey: "userId",  // Fix foreign key
+            as: "OrganizedEvents", // Optional alias
+            onDelete: "CASCADE", 
         });
-
-        // Association with Reviews
+    
         Users.hasMany(models.Reviews, {
             foreignKey: "userId",
             onDelete: "CASCADE",
         });
+    
+        // Many-to-Many relationship through UserEvents
+        Users.belongsToMany(models.Events, {
+            through: models.UserEvents,
+            foreignKey: "userId",
+            onDelete: "CASCADE",
+        });
+        
     };
+    
+    
 
     return Users;
 };
