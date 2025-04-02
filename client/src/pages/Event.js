@@ -407,7 +407,7 @@ export default function Event() {
     }
   };
 
-  // Handle event registration
+  // // Handle event registration
   const handleRegistration = () => {
     // Here you would implement the registration logic
     // For now, just show an alert

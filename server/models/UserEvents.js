@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
             },
             onDelete: "CASCADE"
         },
+        Registered:{
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        }
     },{timestamps: true});
 
     // Associations
